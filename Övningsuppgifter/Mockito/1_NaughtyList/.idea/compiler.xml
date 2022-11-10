@@ -9,5 +9,8 @@
         <module name="NaughtyList" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="1_NaughtyList" target="19" />
+    </bytecodeTargetLevel>
   </component>
 </project>
