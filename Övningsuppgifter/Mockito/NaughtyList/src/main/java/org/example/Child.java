@@ -4,13 +4,13 @@ public class Child {
 
     private String name;
     private int personalNumber;
+    private boolean isNaughty;
 
-    /*
-    public Child(String name, int personalNumber) {
+    public Child(String name, int personalNumber, boolean isNaughty) {
         this.name = name;
         this.personalNumber = personalNumber;
+        this.isNaughty = isNaughty;
     }
-    */
 
     public String getName() {
         return name;
