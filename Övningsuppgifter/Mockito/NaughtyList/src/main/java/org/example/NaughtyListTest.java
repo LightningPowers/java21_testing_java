@@ -7,7 +7,7 @@ import static org.mockito.Mockito.mock;
 
 public class NaughtyListTest {
 
-    private NaughtyList naughtyList = new NaughtyList();
+    private NaughtyList naughtyList;
 
     @BeforeEach
     public void setUp(){
