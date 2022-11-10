@@ -44,9 +44,9 @@ class BookingServiceTest {
 
     @Test
     public void oneAvailableRoom() {
-        ArrayList<String> rooms = new ArrayList<>(Arrays.asList("1", "2", "3"));
-        when(roomService.getAvailableRooms()).thenReturn(rooms);
-        int actual = bookingService.getRoomService().getAvailableRooms().size();
+        ArrayList<String> rooms = new ArrayList<>(Arrays.asList("1", "2", "3")); // Creating arraylist
+        when(roomService.getAvailableRooms()).thenReturn(rooms); // Injecting arraylist to mock class
+        int actual = bookingService.getRoomService().getAvailableRooms().size(); // Calling parent class to get child's arraylist
         assertEquals(3, actual);
     }
 
