@@ -10,27 +10,4 @@ public class NaughtyList {
         return childList;
     }
 
-    public Child getChild(int personNum){
-        System.out.println(childList.size());
-        Child child = null;
-        int i = 0;
-        System.out.println(childList.size());
-        for (Child item : childList) {
-            i++;
-            System.out.println("Hehe XD: " + i);
-            if (item.getPersonalNumber() == personNum){
-                child = item;
-            }
-        }
-        if (childList != null){
-            for (i = 0; i < childList.size(); i++){
-
-            }
-        }
-        return child;
-    }
-
-    public void addChild(Child child){
-        childList.add(child);
-    }
 }
