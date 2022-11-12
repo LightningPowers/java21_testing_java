@@ -15,10 +15,12 @@ import static org.mockito.Mockito.when;
 public class TestClass {
 
     private EggBasket eggBasket;
+    private Rocket rocket;
 
     @BeforeEach
     public void setup(){
         eggBasket = mock(EggBasket.class);
+        rocket = mock(Rocket.class);
     }
 
     // My way (which is good)
@@ -92,5 +94,14 @@ public class TestClass {
         }
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void rocketLaunchMaterial(){
+        String tempMaterial = "Bricks";
+
+        when(rocket.getMaterial()).thenReturn(tempMaterial);
+
+        System.out.println(rocket.launchRocket());
     }
 }
