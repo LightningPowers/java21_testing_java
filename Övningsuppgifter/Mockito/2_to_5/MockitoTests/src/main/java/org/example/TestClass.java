@@ -15,12 +15,10 @@ import static org.mockito.Mockito.when;
 public class TestClass {
 
     private EggBasket eggBasket;
-    private Genie genie;
 
     @BeforeEach
     public void setup(){
         eggBasket = mock(EggBasket.class);
-        genie = mock(Genie.class);
     }
 
     // My way (which is good)
