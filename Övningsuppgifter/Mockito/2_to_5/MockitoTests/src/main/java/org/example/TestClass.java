@@ -75,8 +75,24 @@ public class TestClass {
 
     @Test
     public void askGenieForAxe(){
-        ArrayList<Axe> tempAxeList = new ArrayList<>(List.of(new Axe("Iron"), new Axe("Gold"),new Axe("Silver")));
+        String requestedAxe = "Neither";
 
-        when(genie.getAxes()).thenReturn(tempAxeList);
+        String expected = "All";
+        String actual = null;
+
+        if (requestedAxe.equals("Neither")){
+            System.out.println("The genie nods in approval. The iron axe as well as the other two were given to you!");
+            actual = "All";
+        }
+        else if (requestedAxe.equals("Gold") || requestedAxe.equals("Silver")){
+            System.out.println("The genie disapproves of your greed, and disappears into the river...");
+            actual = "Nothing";
+        }
+        else {
+            System.out.println("The genie is confused by your request...");
+            actual = "Confused";
+        }
+
+        assertEquals(expected, actual);
     }
 }
