@@ -102,6 +102,6 @@ public class TestClass {
 
         when(rocket.getMaterial()).thenReturn(tempMaterial);
 
-        System.out.println(rocket.launchRocket());
+        System.out.println("Rocket launch status: " + rocket.launchRocket());
     }
 }
