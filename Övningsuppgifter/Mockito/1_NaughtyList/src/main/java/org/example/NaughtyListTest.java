@@ -17,7 +17,7 @@ public class NaughtyListTest {
 
     @BeforeEach
     public void setup(){
-        naughtyListMock = spy(NaughtyList.class);
+        naughtyListMock = mock(NaughtyList.class);
         // mock method is used for creating a dummy object
         // spy method is used to use the real object
     }
