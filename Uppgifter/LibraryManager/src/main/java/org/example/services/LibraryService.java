@@ -8,6 +8,8 @@ public class LibraryService {
 
     private BorrowService borrowService;
     private SearchService searchService;
+
+    //Stores books that are used for borrowing and searching
     private ArrayList<Book> storedBooks;
     private static final int borrowPrice = 75;
 
