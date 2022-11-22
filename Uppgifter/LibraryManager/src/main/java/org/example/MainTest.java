@@ -2,16 +2,23 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 class MainTest {
 
     @Test
-    public void TestBookList(){
-        ArrayList<Integer> tempScoreList = new ArrayList<>(Arrays.asList(1, 3, 5, 6, 7, 9, 10));
-        Book book = new Book("50 Shades of Gray", "Comedy", "Jane Austen", 2012, tempScoreList);
-        book.getAverageScore();
+    public void TestBookScoreList(){
+        Book book = new Book("50 Shades of Gray", "Comedy", "Jane Austen", 1984);
+        book.addScore(1);
+        book.addScore(4);
+        book.addScore(-22);
+        System.out.println((book.getAverageScore()));
+    }
+
+    @Test
+    public void TestComments(){
+        Book book = new Book("Faster Than The Speed of Love", "Romance", "Brian Griffin", 2012);
+        book.addComment("Terrible read, reading every single line was painful.");
+        book.addComment("This book truly inspired me, now I will never become an author!");
+        System.out.println(book.getComments().get(1));
     }
 
 }
