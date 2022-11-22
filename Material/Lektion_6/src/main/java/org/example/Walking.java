@@ -11,6 +11,20 @@ public class Walking {
     }
 
     public void goToLeft(){
+        if (currentFoot == Foot.left){
+            throw new IllegalStateException();
+        }
+        currentFoot = Foot.left;
+    }
 
+    public void goToRight(){
+        if (currentFoot == Foot.right){
+            throw new IllegalStateException();
+        }
+        currentFoot = Foot.right;
+    }
+
+    public void stayUpright(){
+        currentFoot = Foot.upright;
     }
 }
