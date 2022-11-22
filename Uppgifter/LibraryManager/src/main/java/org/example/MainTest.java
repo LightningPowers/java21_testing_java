@@ -18,7 +18,7 @@ class MainTest {
         Book book = new Book("Faster Than The Speed of Love", "Romance", "Brian Griffin", 2012);
         book.addComment("Terrible read, reading every single line was painful.");
         book.addComment("This book truly inspired me, now I will never become an author!");
-        System.out.println(book.getComments().get(1));
+        System.out.println(book.getComment(1));
     }
 
 }
