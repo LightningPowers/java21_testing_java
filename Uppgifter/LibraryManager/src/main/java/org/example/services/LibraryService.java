@@ -18,4 +18,12 @@ public class LibraryService {
         this.searchService = searchService;
         this.storedBooks = storedBooks;
     }
+
+    public BorrowService getBorrowService() {
+        return borrowService;
+    }
+
+    public SearchService getSearchService() {
+        return searchService;
+    }
 }
