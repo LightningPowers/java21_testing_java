@@ -6,13 +6,14 @@ import java.util.ArrayList;
 
 public class Book {
 
-    private String title;
-    private String genre;
-    private String authorName;
-    private int publishYear;
-    private ArrayList<Integer> score;
-    private ArrayList<String> comments;
+    private final String title;
+    private final String genre;
+    private final String authorName;
+    private final int publishYear;
+    private final ArrayList<Integer> score;
+    private final ArrayList<String> comments;
     private boolean isBorrowed;
+    private int maxBorrowDays;
 
     public Book(String title, String genre, String authorName, int publishYear) {
         this.title = title;
@@ -22,6 +23,7 @@ public class Book {
         this.score = new ArrayList<>();
         this.comments = new ArrayList<>();
         isBorrowed = false;
+        maxBorrowDays = 30;
     }
 
     public String getTitle() {
@@ -81,5 +83,13 @@ public class Book {
 
     public void setBorrowed(boolean borrowed) {
         isBorrowed = borrowed;
+    }
+
+    public int getMaxBorrowDays() {
+        return maxBorrowDays;
+    }
+
+    public void setMaxBorrowDays(int maxBorrowDays) {
+        this.maxBorrowDays = maxBorrowDays;
     }
 }

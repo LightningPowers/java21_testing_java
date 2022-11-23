@@ -3,7 +3,6 @@ import org.example.services.BorrowService;
 import org.example.services.LibraryService;
 import org.example.services.SearchService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +38,9 @@ class MainTest {
         SearchService searchService = new SearchService();
         LibraryService library = new LibraryService(borrowService, searchService, bookList);
 
-        System.out.println(library.getBorrowService().borrowBook(bookList,"The Hobbit"));
+        System.out.println(library.getBorrowService().borrowBook(library.getBooks(),"The Hobbit"));
+        System.out.println(library.getBorrowService().borrowBook(library.getBooks(),"The Hobbit"));
+        System.out.println(library.getBorrowService().calculateBorrowCost(library.getBooks(), "The Hobbit"));
     }
 
 }
