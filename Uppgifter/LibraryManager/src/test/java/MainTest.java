@@ -9,8 +9,7 @@ import java.util.Arrays;
 
 class MainTest {
 
-
-
+    
     @Test
     public void TestBookScoreList(){
         Book book = new Book("50 Shades of Gray", "Comedy", "Jane Austen", 1984);
