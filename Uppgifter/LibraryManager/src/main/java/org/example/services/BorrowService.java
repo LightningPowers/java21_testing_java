@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class BorrowService {
 
-    private static final int borrowPrice = 75;
+    private static final int borrowPrice = 100;
 
     //Calculate what it would cost to borrow a book
     public double calculateBorrowCost(ArrayList<Book> bookList, String bookTitle){
@@ -71,4 +71,6 @@ public class BorrowService {
         }
         return returnValue;
     }
+
+
 }
