@@ -28,7 +28,7 @@ class MainTest {
     }
 
     @Test
-    public void TestLibraryBorrowService(){
+    public void TestLibraryBorrowService() throws Exception {
         Book book1 = new Book("50 Shades of Gray", "Romance", "E.L. James", 2011);
         Book book2 = new Book("Faster Than The Speed of Love", "Romance", "Brian Griffin", 2012);
         Book book3 = new Book("The Hobbit", "Fantasy", "J.R.R. Tolkien", 1937);

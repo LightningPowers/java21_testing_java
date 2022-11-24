@@ -21,13 +21,16 @@ public class BorrowService {
     }
 
     //Borrow a specified book from the library
-    public boolean borrowBook(ArrayList<Book> bookList, String bookTitle){
+    public boolean borrowBook(ArrayList<Book> bookList, String bookTitle) throws Exception {
         boolean returnValue = false;
 
         for(Book book: bookList){
             if(book.getTitle().equals(bookTitle) && !book.isBorrowed()){
                 book.setBorrowed(true);
                 returnValue = true;
+            }
+            else if(book.getTitle().equals(bookTitle) && book.isBorrowed()){
+                throw new Exception("ERROR: Book is already borrowed!");
             }
         }
         return returnValue;
