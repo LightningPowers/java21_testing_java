@@ -34,8 +34,6 @@ class BorrowServiceTest {
         ArrayList<Book> bookList = new ArrayList<>(Arrays.asList(book1,book2,book3));
         when(library.getBooks()).thenReturn(bookList);
 
-        BorrowService borrowService = new BorrowService();
-
         double expected = 3000;
         double actual = spyBorrowService.calculateBorrowCost(library.getBooks(), "Faster Than The Speed of Love");
 
@@ -69,7 +67,7 @@ class BorrowServiceTest {
         boolean actual = spyBorrowService.addComment(library.getBooks(), "50 Shades of Gray", "Test");
         boolean expected = true;
 
-        assertEquals(expected, actual);
+        assertTrue(actual);
     }
 
     //Testing adding score and seeing result
