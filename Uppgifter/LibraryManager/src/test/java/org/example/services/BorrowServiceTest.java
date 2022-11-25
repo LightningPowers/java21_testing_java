@@ -30,9 +30,6 @@ class BorrowServiceTest {
     @Mock
     private LibraryService library;
 
-    @Mock
-    private ArgumentCaptor<String> stringArgumentCaptor;
-
 
     //Testing BorrowService calculate cost method
     @Test
@@ -68,15 +65,18 @@ class BorrowServiceTest {
 
     //Testing handling of duplicate comment entries
     @Test
-    public void testAddingComments(){
+    public void testAddingComments() throws Exception {
         Book book1 = new Book("50 Shades of Gray", "Romance", "E.L. James", 2011);
         Book book2 = new Book("Faster Than The Speed of Love", "Romance", "Brian Griffin", 2012);
         ArrayList<Book> bookList = new ArrayList<>(Arrays.asList(book1,book2));
         when(library.getBooks()).thenReturn(bookList);
 
-        mockBorrowService.addComment(library.getBooks(), "50 Shades of Gray", "Test");
-        boolean actual = mockBorrowService.addComment(library.getBooks(), "50 Shades of Gray", "Test");
-        boolean expected = false;
+        BorrowService borrowService = new BorrowService();
+
+        borrowService.borrowBook(library.getBooks(), "50 Shades of Gray");
+        borrowService.addComment(library.getBooks(), "50 Shades of Gray", "Test");
+        boolean actual = borrowService.addComment(library.getBooks(), "50 Shades of Gray", "Test");
+        boolean expected = true;
 
         assertEquals(expected, actual);
     }
@@ -84,7 +84,17 @@ class BorrowServiceTest {
     //Testing adding score and seeing result
     @ParameterizedTest
     @ValueSource(ints = {1, 4, 5, 7, 9, 11, 17, -4})
-    public void testAddingScore(){
+    public void testAddingScore(int score) throws Exception {
+        Book book1 = new Book("50 Shades of Gray", "Romance", "E.L. James", 2011);
+        Book book2 = new Book("Faster Than The Speed of Love", "Romance", "Brian Griffin", 2012);
+        ArrayList<Book> bookList = new ArrayList<>(Arrays.asList(book1,book2));
+        when(library.getBooks()).thenReturn(bookList);
 
+        BorrowService borrowService = new BorrowService();
+        borrowService.borrowBook(library.getBooks(), "Faster Than The Speed of Love");
+        boolean actual = borrowService.addScore(library.getBooks(),"Faster Than The Speed of Love", score);
+        boolean expected = true;
+
+        assertEquals(expected, actual);
     }
 }

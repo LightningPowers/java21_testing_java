@@ -51,7 +51,7 @@ public class BorrowService {
 
     //Add comment to book that is currently borrowed
     public boolean addComment(ArrayList<Book> bookList, String bookTitle, String commentToAdd){
-        boolean returnValue = false;
+        boolean canNotAddComment = true;
 
         for(Book book: bookList){
             if(book.getTitle().equals(bookTitle) && book.isBorrowed()){
@@ -60,7 +60,7 @@ public class BorrowService {
 
                 //Checks if comment already exists
                 for(String comment: book.getComments()) {
-                    if (!comment.equals(commentToAdd)) {
+                    if (comment.equals(commentToAdd)) {
                         commentExists = true;
                         break;
                     }
@@ -68,12 +68,11 @@ public class BorrowService {
                 //Adds comment if it does not exist
                 if (!commentExists){
                     book.addComment(commentToAdd);
-                    returnValue = true;
+                    canNotAddComment = false;
                 }
-
             }
         }
-        return returnValue;
+        return canNotAddComment;
     }
 
     //Add score to book that is currently borrowed
