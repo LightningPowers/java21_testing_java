@@ -18,14 +18,8 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class BorrowServiceTest {
 
-    @Mock
-    private BorrowService mockBorrowService;
-
-    @Mock
-    private SearchService mockSearchService;
-
-    @Mock
-    private ArrayList<Book> mockBookList;
+    @Spy
+    private BorrowService spyBorrowService;
 
     @Mock
     private LibraryService library;
@@ -43,7 +37,7 @@ class BorrowServiceTest {
         BorrowService borrowService = new BorrowService();
 
         double expected = 3000;
-        double actual = borrowService.calculateBorrowCost(library.getBooks(), "Faster Than The Speed of Love");
+        double actual = spyBorrowService.calculateBorrowCost(library.getBooks(), "Faster Than The Speed of Love");
 
         assertEquals(expected,actual);
     }
@@ -57,10 +51,9 @@ class BorrowServiceTest {
         ArrayList<Book> bookList = new ArrayList<>(Arrays.asList(book1,book2,book3));
         when(library.getBooks()).thenReturn(bookList);
 
-        BorrowService borrowService = new BorrowService();
-        borrowService.borrowBook(library.getBooks(),"The Hobbit");
+        spyBorrowService.borrowBook(library.getBooks(),"The Hobbit");
 
-        assertThrows(Exception.class, () -> borrowService.borrowBook(library.getBooks(), "The Hobbit"));
+        assertThrows(Exception.class, () -> spyBorrowService.borrowBook(library.getBooks(), "The Hobbit"));
     }
 
     //Testing handling of duplicate comment entries
@@ -71,11 +64,9 @@ class BorrowServiceTest {
         ArrayList<Book> bookList = new ArrayList<>(Arrays.asList(book1,book2));
         when(library.getBooks()).thenReturn(bookList);
 
-        BorrowService borrowService = new BorrowService();
-
-        borrowService.borrowBook(library.getBooks(), "50 Shades of Gray");
-        borrowService.addComment(library.getBooks(), "50 Shades of Gray", "Test");
-        boolean actual = borrowService.addComment(library.getBooks(), "50 Shades of Gray", "Test");
+        spyBorrowService.borrowBook(library.getBooks(), "50 Shades of Gray");
+        spyBorrowService.addComment(library.getBooks(), "50 Shades of Gray", "Test");
+        boolean actual = spyBorrowService.addComment(library.getBooks(), "50 Shades of Gray", "Test");
         boolean expected = true;
 
         assertEquals(expected, actual);
@@ -90,9 +81,8 @@ class BorrowServiceTest {
         ArrayList<Book> bookList = new ArrayList<>(Arrays.asList(book1,book2));
         when(library.getBooks()).thenReturn(bookList);
 
-        BorrowService borrowService = new BorrowService();
-        borrowService.borrowBook(library.getBooks(), "Faster Than The Speed of Love");
-        boolean actual = borrowService.addScore(library.getBooks(),"Faster Than The Speed of Love", score);
+        spyBorrowService.borrowBook(library.getBooks(), "Faster Than The Speed of Love");
+        boolean actual = spyBorrowService.addScore(library.getBooks(),"Faster Than The Speed of Love", score);
         boolean expected = true;
 
         assertEquals(expected, actual);

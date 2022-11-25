@@ -21,6 +21,9 @@ public class SearchService {
         else if(searchMethod.equals("Year")){
             foundBooks = searchByYear(bookList, Integer.parseInt(searchTerm));
         }
+        else if(searchMethod.equals("Score")){
+            foundBooks = searchByScore(bookList);
+        }
         else{
             throw new Exception("ERROR: Invalid search method!");
         }
@@ -70,6 +73,17 @@ public class SearchService {
 
         for(Book book: bookList){
             if(book.getPublishYear() == year){
+                foundBooks.add(book);
+            }
+        }
+        return foundBooks;
+    }
+
+    private ArrayList<Book> searchByScore(ArrayList<Book> bookList) {
+        ArrayList<Book> foundBooks = new ArrayList<>();
+
+        for(Book book: bookList){
+            if(book.getAverageScore() >= 8){
                 foundBooks.add(book);
             }
         }
