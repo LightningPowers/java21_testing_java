@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 class MainTest {
 
     
@@ -16,7 +19,10 @@ class MainTest {
         book.addScore(1);
         book.addScore(4);
         book.addScore(-22);
-        System.out.println((book.getAverageScore()));
+        //System.out.println((book.getAverageScore()));
+
+        double actual = book.getAverageScore();
+        assertEquals(1.7, actual);
     }
 
     @Test
@@ -24,7 +30,8 @@ class MainTest {
         Book book = new Book("Faster Than The Speed of Love", "Romance", "Brian Griffin", 2012);
         book.addComment("Terrible read, reading every single line was painful.");
         book.addComment("This book truly inspired me, now I will never become an author!");
-        System.out.println(book.getComment(1));
+        //System.out.println(book.getComment(1));
+        assertNotEquals("Terrible read, reading every single line was painful.", book.getComment(1));
     }
 
     @Test
@@ -37,9 +44,13 @@ class MainTest {
         SearchService searchService = new SearchService();
         LibraryService library = new LibraryService(borrowService, searchService, bookList);
 
-        System.out.println(library.getBorrowService().borrowBook(library.getBooks(),"The Hobbit"));
-        System.out.println(library.getBorrowService().borrowBook(library.getBooks(),"The Hobbit"));
-        System.out.println(library.getBorrowService().calculateBorrowCost(library.getBooks(), "The Hobbit"));
+        //System.out.println(library.getBorrowService().borrowBook(library.getBooks(),"The Hobbit"));
+        //System.out.println(library.getBorrowService().calculateBorrowCost(library.getBooks(), "The Hobbit"));
+
+        double expected = 3000;
+        double actual = library.getBorrowService().calculateBorrowCost(library.getBooks(), "The Hobbit");
+
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -54,7 +65,10 @@ class MainTest {
 
         ArrayList<Book> foundBooks = new ArrayList<>
                 (library.getSearchService().bookSearch(library.getBooks(), "Year", "2011"));
-        System.out.println(foundBooks.get(0).getTitle());
+        //System.out.println(foundBooks.get(0).getTitle());
+        String actual = foundBooks.get(0).getTitle();
+
+        assertEquals("50 Shades of Gray", actual);
     }
 
 }
