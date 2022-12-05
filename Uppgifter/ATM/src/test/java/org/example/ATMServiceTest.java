@@ -25,8 +25,8 @@ class ATMServiceTest {
 
     @Test
     public void TestGetUsersFromBank(){
-        Card card1 = new Card(1001);
-        User user1 = new User("Jonas Persson", card1);
+        Card card1 = new Card(10001);
+        User user1 = new User("Jonas Persson", card1, 5555);
         ArrayList<User> users = new ArrayList<>();
         users.add(user1);
 
@@ -35,13 +35,20 @@ class ATMServiceTest {
         assertEquals(atmService.getBankService().getUsers().size(), 1);
     }
 
+    //1 Using card ID, returns associated user
     @Test
     public void TestGetUserWithCardId(){
-        Card card1 = new Card(1001);
-        User user1 = new User("Jonas Persson", card1);
+        Card card1 = new Card(10001);
+        User user1 = new User("Jonas Persson", card1, 5555);
 
         when(bankService.getUserFromList(anyDouble())).thenReturn(user1);
-        User actual = atmService.getBankService().getUserFromList(1001);
+        User actual = atmService.getBankService().getUserFromList(card1.getId());
         assertEquals(user1, actual);
+    }
+
+    //2 Login with PIN code
+    @Test
+    public void TestPinCode(){
+
     }
 }

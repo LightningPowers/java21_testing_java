@@ -20,4 +20,20 @@ public class BankService {
         }
         return returnedUser;
     }
+
+    public int verifyPinCode(int pinCode) {
+        int remainingAttempts = 3;
+        boolean couldLogin = false;
+
+        for (User user: userList){
+            if (pinCode == user.getPinCode()){
+                couldLogin = true;
+            }
+        }
+        if (!couldLogin){
+            remainingAttempts--;
+        }
+
+        return remainingAttempts;
+    }
 }

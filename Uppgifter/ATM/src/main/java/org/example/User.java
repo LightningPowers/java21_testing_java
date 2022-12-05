@@ -6,10 +6,13 @@ public class User {
     private double id;
     private Card card;
 
-    public User(String name, Card card) {
+    private int pinCode;
+
+    public User(String name, Card card, int pinCode) {
         this.name = name;
         this.id = card.getId();
         this.card = card;
+        this.pinCode = pinCode;
     }
 
     public String getName() {
@@ -18,5 +21,9 @@ public class User {
 
     public double getId() {
         return id;
+    }
+
+    public int getPinCode() {
+        return pinCode;
     }
 }
