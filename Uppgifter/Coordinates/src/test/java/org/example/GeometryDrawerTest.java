@@ -65,12 +65,12 @@ class GeometryDrawerTest {
     @Test
     public void TestFourCoordinates(){
         List<Coordinates> coordinatesList = List.of(new Coordinates(1, 1, 1), new Coordinates(1, 1, 1),
-                new Coordinates(1, 1, 1), new Coordinates(1, 1, 1));
+                new Coordinates(2, 1, 1), new Coordinates(3, 1, 1));
 
         String expected = "Square";
         String actual = geometryDrawer.draw(coordinatesList);
         System.out.println(actual);
 
-        assertEquals(expected, actual);
+        assertNotEquals(expected, actual);
     }
 }

@@ -22,12 +22,21 @@ public class GeometryDrawer {
         }
         else if (listSize == 4) {
 
-            if(coordinatesList.get(0).getCoordinates() == coordinatesList.get(1).getCoordinates() &&
-                    coordinatesList.get(1).getCoordinates() == coordinatesList.get(2).getCoordinates() &&
-            coordinatesList.get(2).getCoordinates() == coordinatesList.get(3).getCoordinates()){
+            if (coordinatesList.get(0).getX() == coordinatesList.get(1).getX() &&
+                    coordinatesList.get(1).getX() == coordinatesList.get(2).getX() &&
+                    coordinatesList.get(2).getX() == coordinatesList.get(3).getX()) {
                 returnString = "Square";
             }
-
+            else if (coordinatesList.get(0).getX() == coordinatesList.get(1).getX() &&
+                    coordinatesList.get(1).getX() != coordinatesList.get(2).getX() &&
+                    coordinatesList.get(2).getX() == coordinatesList.get(3).getX()) {
+                returnString = "Rectangle";
+            }
+            else if (coordinatesList.get(0).getX() != coordinatesList.get(1).getX() ||
+                    coordinatesList.get(1).getX() != coordinatesList.get(2).getX() ||
+                    coordinatesList.get(2).getX() != coordinatesList.get(3).getX()) {
+                returnString = "Parallelogram";
+            }
         }
 
         return returnString;
