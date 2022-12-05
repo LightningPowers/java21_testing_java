@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class BankService {
 
     private ArrayList<User> userList = new ArrayList<>();
+    private boolean loggedIn = false;
+    private int remainingAttempts = 3;
 
     public ArrayList<User> getUsers(){
         return userList;
@@ -21,20 +23,29 @@ public class BankService {
         return returnedUser;
     }
 
-    public boolean verifyPinCode(int pinCode) {
-        int remainingAttempts = 3;
+    public int verifyPinCode(int pinCode) {
         boolean couldLogin = false;
 
         for (User user: userList){
             if (pinCode == user.getPinCode()){
                 couldLogin = true;
+                remainingAttempts = 3;
             }
         }
-        if (!couldLogin){
+        if (!couldLogin && remainingAttempts > 0){
             remainingAttempts--;
-            System.out.println("message to user here");
         }
+        else if(!couldLogin){
+            for (User user: userList){
+                if (pinCode == user.getPinCode()){
+                    user.getCard().setLocked(true);
+                }
+            }
+        }
+        return remainingAttempts;
+    }
 
-        return couldLogin;
+    public boolean isLoggedIn() {
+        return loggedIn;
     }
 }

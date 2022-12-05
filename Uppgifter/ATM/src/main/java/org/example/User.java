@@ -26,4 +26,8 @@ public class User {
     public int getPinCode() {
         return pinCode;
     }
+
+    public Card getCard() {
+        return card;
+    }
 }

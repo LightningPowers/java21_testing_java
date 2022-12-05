@@ -17,4 +17,8 @@ public class Card {
     public boolean isLocked() {
         return isLocked;
     }
+
+    public void setLocked(boolean locked) {
+        isLocked = locked;
+    }
 }

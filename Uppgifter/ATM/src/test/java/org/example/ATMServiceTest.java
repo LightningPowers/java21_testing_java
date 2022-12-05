@@ -48,12 +48,23 @@ class ATMServiceTest {
 
     //2 Login successfully with PIN code
     @Test
-    public void TestPinCode(){
+    public void TestCorrectPinCode(){
         Card card1 = new Card(10001);
         User user1 = new User("Jonas Persson", card1, 5555);
 
-        when(bankService.verifyPinCode(anyInt())).thenReturn(true);
-        boolean actual = atmService.getBankService().verifyPinCode(user1.getPinCode());
-        assertTrue(actual);
+        when(bankService.verifyPinCode(anyInt())).thenReturn(3);
+        int actual = atmService.getBankService().verifyPinCode(user1.getPinCode());
+        assertEquals(3, actual);
+    }
+
+    //3 Attempting to log in until it locks card
+    @Test
+    public void TestMultipleIncorrectPinCodes(){
+        Card card1 = new Card(10001);
+        User user1 = new User("Jonas Persson", card1, 5555);
+
+        when(bankService.verifyPinCode(1337)).thenReturn(2);
+        int actual = atmService.getBankService().verifyPinCode(user1.getPinCode());
+        assertEquals(2, actual);
     }
 }
