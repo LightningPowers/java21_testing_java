@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.List;
+
 public class Coordinates {
 
     private double x;
@@ -22,5 +24,9 @@ public class Coordinates {
 
     public double getZ() {
         return z;
+    }
+
+    public List<Double> getCoordinates(){
+        return List.of(x, y, z);
     }
 }
