@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,11 +39,9 @@ class ATMServiceTest {
     public void TestGetUserWithCardId(){
         Card card1 = new Card(1001);
         User user1 = new User("Jonas Persson", card1);
-        ArrayList<User> users = new ArrayList<>();
-        users.add(user1);
 
-        when(bankService.getUsers()).thenReturn(users);
+        when(bankService.getUserFromList(anyDouble())).thenReturn(user1);
         User actual = atmService.getBankService().getUserFromList(1001);
-        System.out.println(actual.getName());
+        assertEquals(user1, actual);
     }
 }
