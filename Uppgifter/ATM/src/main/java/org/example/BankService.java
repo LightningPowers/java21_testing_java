@@ -21,7 +21,7 @@ public class BankService {
         return returnedUser;
     }
 
-    public int verifyPinCode(int pinCode) {
+    public boolean verifyPinCode(int pinCode) {
         int remainingAttempts = 3;
         boolean couldLogin = false;
 
@@ -32,8 +32,9 @@ public class BankService {
         }
         if (!couldLogin){
             remainingAttempts--;
+            System.out.println("message to user here");
         }
 
-        return remainingAttempts;
+        return couldLogin;
     }
 }

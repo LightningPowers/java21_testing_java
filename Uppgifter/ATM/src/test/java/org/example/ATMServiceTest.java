@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyDouble;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -46,9 +46,14 @@ class ATMServiceTest {
         assertEquals(user1, actual);
     }
 
-    //2 Login with PIN code
+    //2 Login successfully with PIN code
     @Test
     public void TestPinCode(){
+        Card card1 = new Card(10001);
+        User user1 = new User("Jonas Persson", card1, 5555);
 
+        when(bankService.verifyPinCode(anyInt())).thenReturn(true);
+        boolean actual = atmService.getBankService().verifyPinCode(user1.getPinCode());
+        assertTrue(actual);
     }
 }
