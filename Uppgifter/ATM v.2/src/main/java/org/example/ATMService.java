@@ -8,6 +8,10 @@ public class ATMService {
         this.bankService = bankService;
     }
 
+    public void logonToATMWithUser(User user){
+        //do stuff
+    }
+
     public BankService getBankService() {
         return bankService;
     }

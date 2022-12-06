@@ -119,4 +119,10 @@ class ATMServiceTest {
     public void TestWithdrawBalance(){
 
     }
+
+    //8
+    @Test
+    public void TestInsufficientBalance(){
+        
+    }
 }
