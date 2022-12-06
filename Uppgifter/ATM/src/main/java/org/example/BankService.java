@@ -53,9 +53,25 @@ public class BankService {
         return loggedIn;
     }
 
-    public double checkAccountBalance(){
+    public double checkAccountBalance(User user){
+        return user.getAccount().getBalance();
+    }
 
-        return 100;
+    public boolean depositBalance(User user, double balanceToDeposit){
+        boolean isSuccessful = true;
+
+        if(balanceToDeposit > 0){
+            double currentBalance = user.getAccount().getBalance();
+
+            user.getAccount().setBalance(
+                    currentBalance += balanceToDeposit
+            );
+        }
+        else {
+            isSuccessful = false;
+        }
+
+        return isSuccessful;
     }
 
     public boolean isLoggedIn() {

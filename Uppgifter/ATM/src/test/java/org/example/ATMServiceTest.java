@@ -2,6 +2,8 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -79,11 +81,32 @@ class ATMServiceTest {
     }
 
     //5 Getting account balance from user account via bank
-    @Test
-    public void TestCheckAccountBalance(){
+    @ParameterizedTest
+    @ValueSource(doubles = {1001.2, 2700.62, 7001.13})
+    public void TestCheckAccountBalance(double accountBalance){
         Card card1 = new Card(10001);
         User user1 = new User("Jonas Persson", card1, 5555);
 
+        when(bankService.checkAccountBalance(user1)).thenReturn(accountBalance);
+        double actual = atmService.getBankService().checkAccountBalance(user1);
+        assertEquals(accountBalance, actual);
+    }
+
+    //6 Deposit balance into account via bank
+    @ParameterizedTest
+    @ValueSource(doubles = {1001.2, 2700.62, 7001.13})
+    public void TestDepositBalance(double balanceToDeposit){
+        Card card1 = new Card(10001);
+        User user1 = new User("Jonas Persson", card1, 5555);
+
+        when(bankService.depositBalance(user1, balanceToDeposit)).thenReturn(true);
+        boolean actual = atmService.getBankService().depositBalance(user1, balanceToDeposit);
+        assertNotEquals(false, actual);
+    }
+
+    //7 Withdraw balance from account via bank
+    @Test
+    public void TestWithdrawBalance(){
         
     }
 }
