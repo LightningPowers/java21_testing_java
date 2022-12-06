@@ -5,14 +5,15 @@ public class User {
     private String name;
     private double id;
     private Card card;
-
     private int pinCode;
+    private Account account;
 
     public User(String name, Card card, int pinCode) {
         this.name = name;
         this.id = card.getId();
         this.card = card;
         this.pinCode = pinCode;
+        this.account = new Account();
     }
 
     public String getName() {
@@ -29,5 +30,9 @@ public class User {
 
     public Card getCard() {
         return card;
+    }
+
+    public Account getAccount() {
+        return account;
     }
 }

@@ -77,4 +77,13 @@ class ATMServiceTest {
         boolean actual = atmService.getBankService().insertCard(card1);
         assertTrue(actual);
     }
+
+    //5 Getting account balance from user account via bank
+    @Test
+    public void TestCheckAccountBalance(){
+        Card card1 = new Card(10001);
+        User user1 = new User("Jonas Persson", card1, 5555);
+
+        
+    }
 }

@@ -53,6 +53,11 @@ public class BankService {
         return loggedIn;
     }
 
+    public double checkAccountBalance(){
+
+        return 100;
+    }
+
     public boolean isLoggedIn() {
         return loggedIn;
     }
