@@ -104,9 +104,21 @@ class ATMServiceTest {
         assertNotEquals(false, actual);
     }
 
+    //6 Deposit balance into account via bank
+    @ParameterizedTest
+    @ValueSource(doubles = {1001.2, 2700.62, 7001.13})
+    public void TestDepositBalance2(double balanceToDeposit){
+        Card card1 = new Card(10001);
+        User user1 = new User("Jonas Persson", card1, 5555);
+
+        when(bankService.depositBalance(user1, balanceToDeposit)).thenReturn(true);
+        boolean actual = atmService.getBankService().depositBalance(user1, balanceToDeposit);
+        assertNotEquals(false, actual);
+    }
+
     //7 Withdraw balance from account via bank
     @Test
     public void TestWithdrawBalance(){
-        
+
     }
 }
