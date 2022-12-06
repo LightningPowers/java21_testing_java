@@ -42,7 +42,15 @@ public class BankService {
                 }
             }
         }
+        System.out.println("Remaining attempts: " + remainingAttempts);
         return remainingAttempts;
+    }
+
+    public boolean insertCard(Card card){
+        if (!card.isLocked()){
+            loggedIn = true;
+        }
+        return loggedIn;
     }
 
     public boolean isLoggedIn() {

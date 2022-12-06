@@ -57,14 +57,24 @@ class ATMServiceTest {
         assertEquals(3, actual);
     }
 
-    //3 Attempting to log in until it locks card
+    //3 Logging in with multiple attempts
     @Test
     public void TestMultipleIncorrectPinCodes(){
         Card card1 = new Card(10001);
         User user1 = new User("Jonas Persson", card1, 5555);
 
-        when(bankService.verifyPinCode(1337)).thenReturn(2);
+        when(bankService.verifyPinCode(anyInt())).thenReturn(0);
         int actual = atmService.getBankService().verifyPinCode(user1.getPinCode());
-        assertEquals(2, actual);
+        assertEquals(0, actual);
+    }
+
+    //4 Check if card is locked when logging in
+    @Test
+    public void TestIfCardIsLocked(){
+        Card card1 = new Card(10001);
+
+        when(bankService.insertCard(card1)).thenReturn(true);
+        boolean actual = atmService.getBankService().insertCard(card1);
+        assertTrue(actual);
     }
 }
