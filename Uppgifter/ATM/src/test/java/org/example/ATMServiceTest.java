@@ -1,5 +1,6 @@
 package org.example;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,19 +20,25 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class ATMServiceTest {
 
+    Card card1;
+    User user1;
+    ArrayList<User> users = new ArrayList<>();
+
     @Mock
     BankService bankService;
 
     @InjectMocks
     ATMService atmService;
 
+    @BeforeEach
+    public void setUp(){
+        card1 = new Card(10001);
+        user1 = new User("Jonas Persson", card1, 5555);
+        users.add(user1);
+    }
+
     @Test
     public void TestGetUsersFromBank() {
-        Card card1 = new Card(10001);
-        User user1 = new User("Jonas Persson", card1, 5555);
-        ArrayList<User> users = new ArrayList<>();
-        users.add(user1);
-
         when(bankService.getUsers()).thenReturn(users);
         System.out.println(bankService.getUsers().size());
         assertEquals(atmService.getBankService().getUsers().size(), 1);
@@ -40,10 +47,6 @@ class ATMServiceTest {
     //1 Using card ID, returns associated user
     @Test
     public void TestGetUserWithCardId() {
-        Card card1 = new Card(10001);
-        User user1 = new User("Jonas Persson", card1, 5555);
-        ArrayList<User> users = new ArrayList<>();
-        users.add(user1);
         when(bankService.getUsers()).thenReturn(users);
         User actual = atmService.getUserFromList(user1.getId());
         assertEquals(user1, actual);
@@ -51,10 +54,6 @@ class ATMServiceTest {
 
     @Test
     public void TestNotGetUserWithCardId() {
-        Card card1 = new Card(10001);
-        User user1 = new User("Jonas Persson", card1, 5555);
-        ArrayList<User> users = new ArrayList<>();
-        users.add(user1);
         when(bankService.getUsers()).thenReturn(users);
         User actual = atmService.getUserFromList(15121);
         assertNull(actual);
@@ -63,11 +62,6 @@ class ATMServiceTest {
     //2 Login successfully with PIN code
     @Test
     public void TestCorrectPinCode() {
-        Card card1 = new Card(10001);
-        User user1 = new User("Jonas Persson", card1, 5555);
-        ArrayList<User> users = new ArrayList<>();
-        users.add(user1);
-
         when(bankService.getUsers()).thenReturn(users);
         int actual = atmService.verifyPinCode(user1.getPinCode(), card1);
         assertEquals(3, actual);
@@ -76,11 +70,6 @@ class ATMServiceTest {
     //3 Failing to log in with multiple attempts
     @Test
     public void TestMultipleIncorrectPinCodes() {
-        Card card1 = new Card(10001);
-        User user1 = new User("Jonas Persson", card1, 5555);
-        ArrayList<User> users = new ArrayList<>();
-        users.add(user1);
-
         when(bankService.getUsers()).thenReturn(users);
         atmService.verifyPinCode(10100, card1);
         atmService.verifyPinCode(11000, card1);
@@ -94,18 +83,14 @@ class ATMServiceTest {
         Card card1 = new Card(10001);
 
         boolean actual = atmService.insertCard(card1);
-        assertTrue(actual);
+        assertFalse(actual);
     }
 
     //5 Getting account balance from user account via bank
     @ParameterizedTest
     @ValueSource(doubles = {1004.2, 2700.62, 7001.13})
     public void TestCheckAccountBalance(double accountBalance) {
-        Card card1 = new Card(10001);
-        User user1 = new User("Jonas Persson", card1, 5555);
-        user1.getAccount().setBalance(accountBalance);
-        ArrayList<User> users = new ArrayList<>();
-        users.add(user1);
+        users.get(0).getAccount().setBalance(accountBalance);
 
         when(bankService.getUsers()).thenReturn(users);
         double actual = atmService.checkAccountBalance(10001);
@@ -115,8 +100,6 @@ class ATMServiceTest {
     //6 Deposit balance into account via bank
     @Test
     public void TestDepositBalance() {
-        Card card1 = new Card(10001);
-        User user1 = new User("Jonas Persson", card1, 5555);
         atmService.depositToAccount( 100, user1);
         verify(bankService, times(1)).depositBalance(any(), anyDouble());
     }
@@ -124,8 +107,6 @@ class ATMServiceTest {
     //7 Withdraw balance from account via bank
     @Test
     public void TestWithdrawBalance() {
-        Card card1 = new Card(10001);
-        User user1 = new User("Jonas Persson", card1, 5555);
         user1.getAccount().setBalance(1500);
         atmService.withdrawFromAccount(1337, user1);
         verify(bankService, times(1)).withdrawBalance(any(), anyDouble());
@@ -134,8 +115,6 @@ class ATMServiceTest {
     //8 Withdrawing balance with insufficient funds
     @Test
     public void TestInsufficientBalance() {
-        Card card1 = new Card(10001);
-        User user1 = new User("Jonas Persson", card1, 5555);
         user1.getAccount().setBalance(3000);
 
         String actual = atmService.withdrawFromAccount(5000, user1);
@@ -145,9 +124,8 @@ class ATMServiceTest {
     //9 Exit the bank process
     @Test
     public void TestLogOut() {
-        when(atmService.signOut()).thenReturn(true);
         boolean actual = atmService.signOut();
-        assertTrue(actual);
+        assertFalse(actual);
     }
 
     //10 Get ATM's associated bank name

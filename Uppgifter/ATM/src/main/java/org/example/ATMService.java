@@ -53,12 +53,12 @@ public class ATMService {
         if (!card.isLocked()){
             loggedIn = true;
         }
-        return loggedIn;
+        return card.isLocked();
     }
 
     public boolean signOut(){
         loggedIn = false;
-        return true;
+        return loggedIn;
     }
 
     public double checkAccountBalance(int userId){
