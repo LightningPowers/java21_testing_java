@@ -14,8 +14,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ATMServiceTest {
@@ -94,24 +93,12 @@ class ATMServiceTest {
     }
 
     //6 Deposit balance into account via bank
-    @ParameterizedTest
-    @ValueSource(doubles = {1001.2, 2700.62, 7001.13})
-    public void TestDepositBalance(double balanceToDeposit){
-        Card card1 = new Card(10001);
-        User user1 = new User("Jonas Persson", card1, 5555);
-
-        when(bankService.depositBalance(user1, balanceToDeposit)).thenReturn(true);
-        boolean actual = atmService.getBankService().depositBalance(user1, balanceToDeposit);
-        assertNotEquals(false, actual);
-    }
-
-    //6 Deposit balance into account via bank
     @Test
     public void TestDepositBalance2(){
         Card card1 = new Card(10001);
         User user1 = new User("Jonas Persson", card1, 5555);
-
-        verify(bankService.depositBalance(user1, 420));
+        bankService.depositBalance(user1, 100);
+        verify(bankService, times(1)).depositBalance(any(),anyDouble());
     }
 
     //7 Withdraw balance from account via bank
