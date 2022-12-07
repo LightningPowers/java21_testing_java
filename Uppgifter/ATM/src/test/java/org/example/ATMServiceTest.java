@@ -143,12 +143,12 @@ class ATMServiceTest {
     }
 
     //9 Exit the bank process
-    /*@Test
+    @Test
     public void TestLogOut() {
-        when(bankService.signOut()).thenReturn(true);
-        boolean actual = atmService.getBankService().signOut();
+        when(atmService.signOut()).thenReturn(true);
+        boolean actual = atmService.signOut();
         assertTrue(actual);
-    }*/
+    }
 
     //10 Get ATM's associated bank name
     @Test
