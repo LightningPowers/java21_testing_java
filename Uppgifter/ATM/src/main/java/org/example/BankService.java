@@ -90,7 +90,8 @@ public class BankService {
         return returnString;
     }
 
-    public boolean isLoggedIn() {
-        return loggedIn;
+    public boolean signOut(){
+        loggedIn = false;
+        return true;
     }
 }

@@ -122,5 +122,13 @@ class ATMServiceTest {
         assertNotEquals("Specified balance of 420 was withdrawn successfully!", actual);
     }
 
-    //9 
+    //9 Exit the bank process
+    @Test
+    public void TestLogOut(){
+        when(bankService.signOut()).thenReturn(true);
+        boolean actual = atmService.getBankService().signOut();
+        assertTrue(actual);
+    }
+
+    //10 
 }
