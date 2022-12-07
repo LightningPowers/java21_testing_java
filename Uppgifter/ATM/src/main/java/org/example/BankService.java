@@ -10,35 +10,22 @@ public class BankService {
         return userList;
     }
 
-    public boolean depositBalance(User user, double balanceToDeposit){
-        boolean isSuccessful = true;
-
+    public void depositBalance(User user, double balanceToDeposit){
         if(balanceToDeposit > 0){
             double currentBalance = user.getAccount().getBalance();
 
             user.getAccount().setBalance(
-                    currentBalance += balanceToDeposit
+                    currentBalance + balanceToDeposit
             );
         }
-        else {
-            isSuccessful = false;
-        }
-        return isSuccessful;
     }
 
     public String withdrawBalance(User user, double balanceToWithdraw){
         String returnString = "";
 
-        if(user.getAccount().getBalance() > balanceToWithdraw){
-            double currentBalance = user.getAccount().getBalance();
-            user.getAccount().setBalance(
-                    currentBalance -= balanceToWithdraw
-            );
-            returnString = "Specified balance of " + balanceToWithdraw + "was withdrawn successfully!";
-        }
-        else {
-            returnString = "Insufficient balance. No funds were withdrawn!";
-        }
+        double currentBalance = user.getAccount().getBalance();
+        user.getAccount().setBalance(currentBalance - balanceToWithdraw);
+        returnString = "Specified balance of " + balanceToWithdraw + "was withdrawn successfully!";
 
         return returnString;
     }

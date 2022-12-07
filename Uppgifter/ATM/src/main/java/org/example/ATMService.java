@@ -73,4 +73,16 @@ public class ATMService {
     public void depositToAccount(double depositAmount, User user){
         bankService.depositBalance(user, depositAmount);
     }
+
+    public String withdrawFromAccount(double withdrawalAmount, User user){
+        String returnString = "";
+
+        if(withdrawalAmount < user.getAccount().getBalance()){
+            returnString= bankService.withdrawBalance(user, withdrawalAmount);
+        }
+        else {
+            returnString = "Insufficient balance. No funds were withdrawn!";
+        }
+        return returnString;
+    }
 }
