@@ -11,8 +11,6 @@ public class BankService {
         return userList;
     }
 
-
-
     public boolean insertCard(Card card){
         if (!card.isLocked()){
             loggedIn = true;

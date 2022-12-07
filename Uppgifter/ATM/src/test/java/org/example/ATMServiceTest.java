@@ -69,11 +69,11 @@ class ATMServiceTest {
         users.add(user1);
 
         when(bankService.getUsers()).thenReturn(users);
-        int actual = atmService.verifyPinCode(user1.getPinCode());
+        int actual = atmService.verifyPinCode(user1.getPinCode(), card1);
         assertEquals(3, actual);
     }
 
-    //3 Logging in with multiple attempts
+    //3 Failing to log in with multiple attempts
     @Test
     public void TestMultipleIncorrectPinCodes() {
         Card card1 = new Card(10001);
@@ -82,7 +82,9 @@ class ATMServiceTest {
         users.add(user1);
 
         when(bankService.getUsers()).thenReturn(users);
-        int actual = atmService.verifyPinCode(user1.getPinCode());
+        atmService.verifyPinCode(10100, card1);
+        atmService.verifyPinCode(11000, card1);
+        int actual = atmService.verifyPinCode(10010, card1);
         assertEquals(0, actual);
     }
 

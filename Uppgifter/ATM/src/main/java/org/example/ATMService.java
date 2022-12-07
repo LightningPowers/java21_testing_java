@@ -24,7 +24,7 @@ public class ATMService {
         return returnedUser;
     }
 
-    public int verifyPinCode(int pinCode) {
+    public int verifyPinCode(int pinCode, Card card) {
         boolean couldLogin = false;
 
         for (User user: bankService.getUsers()){
@@ -34,17 +34,17 @@ public class ATMService {
                 break;
             }
         }
-        if (!couldLogin && remainingAttempts > 0){
+
+        if(!couldLogin && remainingAttempts == 1){
+            card.setLocked(true);
             remainingAttempts--;
+            System.out.println("Remaining attempts: " + remainingAttempts);
+            System.out.println("Locked card!");
         }
-        else if(!couldLogin){
-            for (User user: bankService.getUsers()){
-                if (pinCode == user.getPinCode()){
-                    user.getCard().setLocked(true);
-                }
-            }
+        else if (!couldLogin && remainingAttempts > 1){
+            remainingAttempts--;
+            System.out.println("Remaining attempts: " + remainingAttempts);
         }
-        System.out.println("Remaining attempts: " + remainingAttempts);
         return remainingAttempts;
     }
 }
