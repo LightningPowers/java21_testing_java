@@ -114,10 +114,10 @@ class ATMServiceTest {
 
     //6 Deposit balance into account via bank
     @Test
-    public void TestDepositBalance2() {
+    public void TestDepositBalance() {
         Card card1 = new Card(10001);
         User user1 = new User("Jonas Persson", card1, 5555);
-        bankService.depositBalance(user1, 100);
+        atmService.depositToAccount( 100, user1);
         verify(bankService, times(1)).depositBalance(any(), anyDouble());
     }
 

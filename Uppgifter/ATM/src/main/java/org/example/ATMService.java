@@ -70,4 +70,7 @@ public class ATMService {
         }
         return returnValue;
     }
+    public void depositToAccount(double depositAmount, User user){
+        bankService.depositBalance(user, depositAmount);
+    }
 }
