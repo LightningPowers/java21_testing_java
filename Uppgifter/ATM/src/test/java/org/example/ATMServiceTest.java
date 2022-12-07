@@ -65,9 +65,11 @@ class ATMServiceTest {
     public void TestCorrectPinCode() {
         Card card1 = new Card(10001);
         User user1 = new User("Jonas Persson", card1, 5555);
+        ArrayList<User> users = new ArrayList<>();
+        users.add(user1);
 
-        when(bankService.verifyPinCode(anyInt())).thenReturn(3);
-        int actual = atmService.getBankService().verifyPinCode(user1.getPinCode());
+        when(bankService.getUsers()).thenReturn(users);
+        int actual = atmService.verifyPinCode(user1.getPinCode());
         assertEquals(3, actual);
     }
 
@@ -76,9 +78,11 @@ class ATMServiceTest {
     public void TestMultipleIncorrectPinCodes() {
         Card card1 = new Card(10001);
         User user1 = new User("Jonas Persson", card1, 5555);
+        ArrayList<User> users = new ArrayList<>();
+        users.add(user1);
 
-        when(bankService.verifyPinCode(anyInt())).thenReturn(0);
-        int actual = atmService.getBankService().verifyPinCode(user1.getPinCode());
+        when(bankService.getUsers()).thenReturn(users);
+        int actual = atmService.verifyPinCode(user1.getPinCode());
         assertEquals(0, actual);
     }
 

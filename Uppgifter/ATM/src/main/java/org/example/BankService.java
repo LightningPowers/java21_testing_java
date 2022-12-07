@@ -6,36 +6,12 @@ public class BankService {
 
     private ArrayList<User> userList = new ArrayList<>();
     private boolean loggedIn = false;
-    private int remainingAttempts = 3;
 
     public ArrayList<User> getUsers(){
         return userList;
     }
 
 
-
-    public int verifyPinCode(int pinCode) {
-        boolean couldLogin = false;
-
-        for (User user: userList){
-            if (pinCode == user.getPinCode()){
-                couldLogin = true;
-                remainingAttempts = 3;
-            }
-        }
-        if (!couldLogin && remainingAttempts > 0){
-            remainingAttempts--;
-        }
-        else if(!couldLogin){
-            for (User user: userList){
-                if (pinCode == user.getPinCode()){
-                    user.getCard().setLocked(true);
-                }
-            }
-        }
-        System.out.println("Remaining attempts: " + remainingAttempts);
-        return remainingAttempts;
-    }
 
     public boolean insertCard(Card card){
         if (!card.isLocked()){
