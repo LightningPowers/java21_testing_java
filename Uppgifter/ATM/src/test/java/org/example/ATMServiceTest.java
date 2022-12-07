@@ -99,13 +99,16 @@ class ATMServiceTest {
 
     //5 Getting account balance from user account via bank
     @ParameterizedTest
-    @ValueSource(doubles = {1001.2, 2700.62, 7001.13})
+    @ValueSource(doubles = {1004.2, 2700.62, 7001.13})
     public void TestCheckAccountBalance(double accountBalance) {
         Card card1 = new Card(10001);
         User user1 = new User("Jonas Persson", card1, 5555);
+        user1.getAccount().setBalance(accountBalance);
+        ArrayList<User> users = new ArrayList<>();
+        users.add(user1);
 
-        when(bankService.checkAccountBalance(user1)).thenReturn(accountBalance);
-        double actual = atmService.getBankService().checkAccountBalance(user1);
+        when(bankService.getUsers()).thenReturn(users);
+        double actual = atmService.checkAccountBalance(10001);
         assertEquals(accountBalance, actual);
     }
 

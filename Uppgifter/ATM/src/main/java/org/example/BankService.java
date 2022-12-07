@@ -10,10 +10,6 @@ public class BankService {
         return userList;
     }
 
-    public double checkAccountBalance(User user){
-        return user.getAccount().getBalance();
-    }
-
     public boolean depositBalance(User user, double balanceToDeposit){
         boolean isSuccessful = true;
 
@@ -48,6 +44,6 @@ public class BankService {
     }
 
     public static String getAtmBank(){
-        return "något";
+        return "Insert bank name here";
     }
 }

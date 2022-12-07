@@ -60,4 +60,14 @@ public class ATMService {
         loggedIn = false;
         return true;
     }
+
+    public double checkAccountBalance(int userId){
+        double returnValue = 0;
+        for (User user : bankService.getUsers()){
+            if(user.getId() == userId){
+                returnValue = user.getAccount().getBalance();
+            }
+        }
+        return returnValue;
+    }
 }
