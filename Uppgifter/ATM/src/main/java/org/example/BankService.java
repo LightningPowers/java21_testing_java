@@ -12,16 +12,7 @@ public class BankService {
         return userList;
     }
 
-    public User getUserFromList(double id) {
-        User returnedUser = null;
 
-        for (User user: userList){
-            if (id == user.getId()){
-                returnedUser = user;
-            }
-        }
-        return returnedUser;
-    }
 
     public int verifyPinCode(int pinCode) {
         boolean couldLogin = false;
@@ -93,5 +84,9 @@ public class BankService {
     public boolean signOut(){
         loggedIn = false;
         return true;
+    }
+
+    public static String getAtmBank(){
+        return "något";
     }
 }

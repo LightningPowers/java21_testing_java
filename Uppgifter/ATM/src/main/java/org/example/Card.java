@@ -2,15 +2,15 @@ package org.example;
 
 public class Card {
 
-    private double id;
+    private int id;
     private boolean isLocked;
 
-    public Card(double id) {
+    public Card(int id) {
         this.id = id;
         this.isLocked = false;
     }
 
-    public double getId() {
+    public int getId() {
         return id;
     }
 

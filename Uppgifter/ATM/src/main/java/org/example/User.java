@@ -3,7 +3,7 @@ package org.example;
 public class User {
 
     private String name;
-    private double id;
+    private int id;
     private Card card;
     private int pinCode;
     private Account account;
@@ -20,7 +20,7 @@ public class User {
         return name;
     }
 
-    public double getId() {
+    public int getId() {
         return id;
     }
 
