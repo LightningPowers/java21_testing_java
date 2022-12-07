@@ -4,6 +4,7 @@ public class ATMService {
 
     private BankService bankService;
     private int remainingAttempts = 3;
+    private boolean loggedIn = false;
 
 
     public ATMService(BankService bankService) {
@@ -46,5 +47,17 @@ public class ATMService {
             System.out.println("Remaining attempts: " + remainingAttempts);
         }
         return remainingAttempts;
+    }
+
+    public boolean insertCard(Card card){
+        if (!card.isLocked()){
+            loggedIn = true;
+        }
+        return loggedIn;
+    }
+
+    public boolean signOut(){
+        loggedIn = false;
+        return true;
     }
 }

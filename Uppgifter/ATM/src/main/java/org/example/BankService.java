@@ -5,17 +5,9 @@ import java.util.ArrayList;
 public class BankService {
 
     private ArrayList<User> userList = new ArrayList<>();
-    private boolean loggedIn = false;
 
     public ArrayList<User> getUsers(){
         return userList;
-    }
-
-    public boolean insertCard(Card card){
-        if (!card.isLocked()){
-            loggedIn = true;
-        }
-        return loggedIn;
     }
 
     public double checkAccountBalance(User user){
@@ -53,11 +45,6 @@ public class BankService {
         }
 
         return returnString;
-    }
-
-    public boolean signOut(){
-        loggedIn = false;
-        return true;
     }
 
     public static String getAtmBank(){

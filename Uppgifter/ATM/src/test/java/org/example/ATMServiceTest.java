@@ -88,13 +88,12 @@ class ATMServiceTest {
         assertEquals(0, actual);
     }
 
-    //4 Check if card is locked when logging in
+    //4 Check if card is locked before logging in
     @Test
     public void TestIfCardIsLocked() {
         Card card1 = new Card(10001);
 
-        when(bankService.insertCard(card1)).thenReturn(true);
-        boolean actual = atmService.getBankService().insertCard(card1);
+        boolean actual = atmService.insertCard(card1);
         assertTrue(actual);
     }
 
@@ -141,12 +140,12 @@ class ATMServiceTest {
     }
 
     //9 Exit the bank process
-    @Test
+    /*@Test
     public void TestLogOut() {
         when(bankService.signOut()).thenReturn(true);
         boolean actual = atmService.getBankService().signOut();
         assertTrue(actual);
-    }
+    }*/
 
     //10 Get ATM's associated bank name
     @Test
