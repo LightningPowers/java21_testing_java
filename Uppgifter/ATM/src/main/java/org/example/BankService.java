@@ -70,8 +70,24 @@ public class BankService {
         else {
             isSuccessful = false;
         }
-
         return isSuccessful;
+    }
+
+    public String withdrawBalance(User user, double balanceToWithdraw){
+        String returnString = "";
+
+        if(user.getAccount().getBalance() > balanceToWithdraw){
+            double currentBalance = user.getAccount().getBalance();
+            user.getAccount().setBalance(
+                    currentBalance -= balanceToWithdraw
+            );
+            returnString = "Specified balance of " + balanceToWithdraw + "was withdrawn successfully!";
+        }
+        else {
+            returnString = "Insufficient balance. No funds were withdrawn!";
+        }
+
+        return returnString;
     }
 
     public boolean isLoggedIn() {

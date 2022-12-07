@@ -104,12 +104,23 @@ class ATMServiceTest {
     //7 Withdraw balance from account via bank
     @Test
     public void TestWithdrawBalance(){
-
+        Card card1 = new Card(10001);
+        User user1 = new User("Jonas Persson", card1, 5555);
+        bankService.withdrawBalance(user1, 1337);
+        bankService.withdrawBalance(user1, 1337);
+        verify(bankService, times(2)).withdrawBalance(any(), anyDouble());
     }
 
-    //8
+    //8 Withdrawing balance with insufficient funds
     @Test
     public void TestInsufficientBalance(){
-        
+        Card card1 = new Card(10001);
+        User user1 = new User("Jonas Persson", card1, 5555);
+
+        when(bankService.withdrawBalance(any(), anyDouble())).thenReturn("Insufficient balance!");
+        String actual = atmService.getBankService().withdrawBalance(user1, 420);
+        assertNotEquals("Specified balance of 420 was withdrawn successfully!", actual);
     }
+
+    //9 
 }
